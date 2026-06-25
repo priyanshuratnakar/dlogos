@@ -8,21 +8,23 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --black: #000000;
-    --dark-grey: #1A1A1A;
+    --black: #0d0805;
+    --near-black: #150e09;
+    --panel: #1c1410;
     --white: #FFFFFF;
-    --orange: #FA660F;
+    --orange: #fa660f;
     --orange-bright: #fb7527;
     --orange-tint: #fc9457;
     --orange-soft: #fdb387;
+    --orange-pale: #fdc29f;
     --orange-deep: #c8520c;
     --orange-shade: #963d09;
-    --white-dim: rgba(255,255,255,0.62);
-    --white-faint: rgba(255,255,255,0.16);
-    --serif-display: 'Author', Georgia, 'Times New Roman', serif;
+    --white-dim: rgba(255,255,255,0.66);
+    --white-faint: rgba(255,255,255,0.14);
+    --display: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --body-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
@@ -35,36 +37,33 @@
     min-height:100vh;
     font-family: var(--body-sans);
     background:
-      radial-gradient(ellipse 120% 80% at 50% -10%, var(--dark-grey) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 60% at 15% 100%, #0d0d0d 0%, transparent 60%),
+      radial-gradient(ellipse 90% 60% at 85% 0%, rgba(250,102,15,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 0% 100%, rgba(250,102,15,0.10) 0%, transparent 60%),
       var(--black);
     color: var(--white);
     position: relative;
     overflow-x: hidden;
   }
 
-  /* subtle ambient grain */
-  body::before{
-    content:"";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    opacity: .05;
-    z-index: 0;
-    background-image:
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  .brand-bar{
+    position: relative;
+    z-index: 2;
+    padding: clamp(16px, 4vw, 26px) clamp(16px, 5vw, 28px) 0;
   }
-
-  .glow-amber{
-    position: fixed;
-    width: 60vw; height: 60vw;
-    max-width: 900px; max-height: 900px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(250,102,15,0.20) 0%, transparent 70%);
-    top: -10vw; left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: 0;
+  .dlogos-brand-mark{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(86px, 13vw, 108px);
+    height: auto;
+    opacity: .96;
+    text-decoration: none;
+  }
+  .dlogos-brand-mark svg{
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 30px;
   }
 
   .wrap{
@@ -72,141 +71,181 @@
     z-index: 1;
     max-width: 760px;
     margin: 0 auto;
-    padding: clamp(28px, 6vw, 64px) clamp(16px, 5vw, 28px) 160px;
+    padding: clamp(20px, 5vw, 40px) clamp(16px, 5vw, 28px) 160px;
   }
 
-  /* ---------- Eyebrow / header ---------- */
-  .eyebrow{
-    text-align: center;
-    margin-bottom: clamp(18px, 4vw, 28px);
+  /* ---------- Hero: two-up on desktop, stacked on mobile ---------- */
+  .hero-grid{
+    display:flex;
+    flex-direction: column;
   }
-  .eyebrow .kicker{
-    display:inline-flex;
-    align-items:center;
-    gap: 7px;
-    font-size: clamp(9.5px, 2.6vw, 11px);
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--orange-tint);
-    font-weight: 600;
-    padding: 7px 14px;
-    border: 1px solid rgba(250,102,15,0.35);
-    border-radius: 999px;
-    background: rgba(250,102,15,0.08);
-    white-space: nowrap;
-    max-width: 100%;
-  }
-  .eyebrow .kicker::before{
-    content:"";
-    width:5px; height:5px;
-    border-radius:50%;
-    background: var(--orange);
-    box-shadow: 0 0 8px var(--orange);
+  .hero-content{ text-align:center; }
+
+  .kicker{
+    text-align:center;
+    font-size: clamp(11px, 2.4vw, 13px);
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--orange-soft);
+    margin: 0 0 10px;
   }
   h1.page-title{
-    font-family: var(--serif-display);
-    font-weight: 600;
+    font-family: var(--display);
+    font-weight: 800;
     text-align: center;
-    font-size: clamp(26px, 5.4vw, 42px);
-    line-height: 1.15;
-    margin: 18px 0 10px;
+    text-transform: uppercase;
+    font-size: clamp(28px, 6vw, 46px);
+    line-height: 1.12;
+    margin: 0 0 20px;
     color: var(--white);
-    letter-spacing: .005em;
+    letter-spacing: -0.01em;
   }
-  .page-sub{
-    text-align: center;
-    font-size: clamp(13.5px, 2.4vw, 15.5px);
-    color: var(--white-dim);
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.55;
-  }
+  h1.page-title .accent{ color: var(--orange); }
 
-  .stat-row{
-    display:flex;
-    justify-content:center;
-    gap: clamp(18px, 5vw, 40px);
-    margin: clamp(22px,5vw,30px) 0 clamp(28px,6vw,40px);
-    flex-wrap: wrap;
-  }
+  /* ---------- Signature count (single stat, no sentence) ---------- */
   .stat{
     text-align:center;
+    margin: 0 0 clamp(28px, 6vw, 38px);
   }
   .stat b{
     display:block;
-    font-family: var(--serif-display);
-    font-size: clamp(20px, 4vw, 26px);
+    font-family: var(--display);
+    font-size: clamp(34px, 7vw, 52px);
+    font-weight: 800;
     color: var(--orange);
-    font-weight: 700;
+    line-height: 1;
   }
   .stat span{
-    font-size: 10.5px;
-    letter-spacing: .12em;
+    display:block;
+    margin-top: 6px;
+    font-size: 12px;
+    letter-spacing: .1em;
     text-transform: uppercase;
+    font-weight: 600;
     color: var(--white-dim);
   }
-  .stat-divider{
-    width:1px;
-    background: var(--white-faint);
-  }
 
-  /* ---------- The letter artifact ---------- */
+  /* ---------- The letter document ---------- */
   .letter-stage{
-    position: relative;
-    display:flex;
-    justify-content:center;
-    margin: 0 auto;
-    perspective: 1400px;
+    margin: 0 0 clamp(32px, 7vw, 48px);
   }
   .letter-frame{
-    position: relative;
-    width: 100%;
-    max-width: 520px;
-    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.65)) drop-shadow(0 8px 18px rgba(0,0,0,0.5));
-    transform: rotate(0deg);
-    transition: transform .6s cubic-bezier(.22,1,.36,1);
+    display:flex;
+    justify-content:center;
+    padding: clamp(18px, 4vw, 28px);
+    border-radius: 20px;
+    background: linear-gradient(160deg, var(--panel), var(--near-black));
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 20px 50px rgba(0,0,0,0.5);
   }
   .letter-frame img{
     display:block;
-    width: 100%;
+    width: auto;
     height: auto;
-    border-radius: 6px;
+    max-width: 100%;
+    max-height: min(68vh, 580px);
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
 
   .letter-caption{
     text-align:center;
-    margin-top: 20px;
+    margin-top: 16px;
     font-size: 12.5px;
     color: var(--white-dim);
-    letter-spacing: .03em;
+    letter-spacing: .01em;
   }
   .letter-caption .amt{
-    color: var(--orange-tint);
-    font-weight: 600;
+    color: var(--orange-soft);
+    font-weight: 700;
+  }
+
+  /* ---------- Desktop: single nonscrollable viewport, content left / letter right ---------- */
+  @media (min-width: 901px){
+    html, body{ height: 100vh; overflow: hidden; }
+    body{ display:flex; flex-direction:column; }
+    .wrap{
+      flex: 1 1 auto;
+      min-height: 0;
+      display:flex;
+      flex-direction: column;
+      padding-top: clamp(8px, 2vh, 20px);
+      padding-bottom: clamp(8px, 2vh, 20px);
+    }
+    .hero-grid{
+      flex: 1 1 auto;
+      min-height: 0;
+      flex-direction: row;
+      align-items: center;
+      gap: clamp(28px, 4vw, 56px);
+    }
+    .hero-content{
+      flex: 0 1 42%;
+      text-align: left;
+    }
+    .kicker, h1.page-title{ text-align: left; }
+    .stat{ text-align: left; margin-bottom: 0; }
+    .letter-stage{
+      flex: 1 1 58%;
+      margin: 0;
+      height: 100%;
+      min-height: 0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .letter-frame{
+      height: 100%;
+      width: 100%;
+      align-items: center;
+      padding: clamp(8px, 1.5vh, 16px);
+    }
+    .letter-frame img{
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      max-width: none;
+    }
+    .letter-caption{ display:none; }
+    .context, footer{ display:none; }
   }
 
   /* ---------- Body copy section ---------- */
   .context{
-    margin-top: clamp(40px, 8vw, 60px);
     border-top: 1px solid var(--white-faint);
     padding-top: clamp(28px, 6vw, 40px);
   }
   .context h2{
-    font-family: var(--serif-display);
-    font-size: clamp(18px, 3.4vw, 22px);
-    font-weight: 600;
+    font-family: var(--display);
+    font-size: clamp(19px, 3.4vw, 23px);
+    font-weight: 700;
     color: var(--white);
-    margin: 0 0 14px;
+    margin: 0 0 16px;
   }
   .context p{
-    font-size: 14.5px;
+    font-size: 15px;
     line-height: 1.7;
     color: var(--white-dim);
     margin: 0 0 14px;
+    max-width: 65ch;
   }
+  .context p:last-child{ margin-bottom:0; }
   .context a{
-    color: var(--orange-tint);
+    color: var(--orange-soft);
     text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 600;
+  }
+
+  .cta-link{
+    display: inline-flex;
+    color: var(--orange) !important;
+    text-decoration: none !important;
+    font-weight: 700;
+  }
+  .cta-link:hover{ color: var(--orange-bright) !important; }
+  .hero-cta{
+    font-size: 14px;
     text-underline-offset: 2px;
   }
 
@@ -214,8 +253,8 @@
   .dock-scrim{
     position: fixed;
     left: 0; right: 0; bottom: 0;
-    height: 140px;
-    background: linear-gradient(180deg, transparent, rgba(8,6,4,0.0) 10%, rgba(8,6,4,0.55) 55%, rgba(8,6,4,0.85));
+    height: 130px;
+    background: linear-gradient(180deg, transparent, rgba(13,8,5,0.0) 10%, rgba(13,8,5,0.7) 55%, rgba(13,8,5,0.94));
     pointer-events: none;
     z-index: 45;
   }
@@ -238,28 +277,22 @@
     display:flex;
     align-items:center;
     gap: 10px;
-    padding: 15px 22px;
+    padding: 15px 24px;
     border-radius: 999px;
-    font-family: var(--body-sans);
+    font-family: var(--display);
     font-weight: 700;
     font-size: 14.5px;
     letter-spacing: .01em;
     color: var(--black);
-    background: linear-gradient(135deg, var(--orange-bright), var(--orange) 55%, var(--orange-deep));
-    box-shadow:
-      0 10px 24px rgba(250,102,15,0.32),
-      0 2px 6px rgba(0,0,0,0.4),
-      inset 0 1px 0 rgba(255,255,255,0.45);
+    background: linear-gradient(135deg, var(--orange-bright), var(--orange) 60%, var(--orange-deep));
+    box-shadow: 0 12px 28px rgba(250,102,15,0.4);
     transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
     position: relative;
   }
   .sign-btn:hover{
     transform: translateY(-2px);
     filter: brightness(1.06);
-    box-shadow:
-      0 14px 30px rgba(250,102,15,0.42),
-      0 3px 8px rgba(0,0,0,0.45),
-      inset 0 1px 0 rgba(255,255,255,0.5);
+    box-shadow: 0 16px 34px rgba(250,102,15,0.5);
   }
   .sign-btn:active{
     transform: translateY(0px) scale(.98);
@@ -277,17 +310,16 @@
   }
   @keyframes ringPulse{
     0%{ opacity:.55; transform:scale(1); }
-    100%{ opacity:0; transform:scale(1.18); }
+    100%{ opacity:0; transform:scale(1.14); }
   }
 
   .sign-hint{
     font-size: 11px;
     color: var(--white-dim);
-    background: rgba(0,0,0,0.7);
+    background: var(--panel);
     backdrop-filter: blur(6px);
     padding: 5px 11px;
     border-radius: 999px;
-    border: 1px solid var(--white-faint);
     opacity: 0;
     transform: translateY(4px);
     transition: opacity .3s ease, transform .3s ease;
@@ -304,16 +336,15 @@
     bottom: 100px;
     transform: translate(-50%, 12px);
     z-index: 60;
-    background: var(--dark-grey);
-    border: 1px solid rgba(250,102,15,0.3);
+    background: var(--panel);
     color: var(--white);
     padding: 12px 18px;
-    border-radius: 12px;
+    border-radius: 14px;
     font-size: 13px;
     max-width: min(92vw, 380px);
     text-align:center;
     line-height: 1.5;
-    box-shadow: 0 14px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.55);
     opacity: 0;
     pointer-events: none;
     transition: opacity .3s ease, transform .3s ease;
@@ -323,14 +354,14 @@
     transform: translate(-50%, 0);
     pointer-events: auto;
   }
-  .toast b{ color: var(--orange-tint); }
+  .toast b{ color: var(--orange-soft); }
 
   /* ---------- Modal: image saved, confirm before opening X ---------- */
   .modal-overlay{
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.78);
-    backdrop-filter: blur(6px);
+    background: rgba(13,8,5,0.8);
+    backdrop-filter: blur(5px);
     z-index: 80;
     display:flex;
     align-items:center;
@@ -345,9 +376,8 @@
   .modal{
     width: 100%;
     max-width: 400px;
-    background: linear-gradient(180deg, var(--dark-grey), var(--black));
-    border: 1px solid rgba(250,102,15,0.25);
-    border-radius: 18px;
+    background: linear-gradient(160deg, var(--panel), var(--near-black));
+    border-radius: 20px;
     padding: 26px 24px 22px;
     transform: translateY(14px) scale(.97);
     transition: transform .3s cubic-bezier(.22,1,.36,1);
@@ -358,17 +388,17 @@
   .modal .check{
     width: 46px; height:46px;
     border-radius: 50%;
-    background: rgba(250,102,15,0.15);
-    border: 1px solid rgba(250,102,15,0.4);
+    background: rgba(250,102,15,0.18);
     display:flex; align-items:center; justify-content:center;
     margin: 0 auto 16px;
   }
   .modal .check svg{ width:22px; height:22px; }
 
   .modal h3{
-    font-family: var(--serif-display);
+    font-family: var(--display);
     text-align:center;
     font-size: 19px;
+    font-weight: 700;
     margin: 0 0 10px;
     color: var(--white);
   }
@@ -379,7 +409,7 @@
     line-height: 1.6;
     margin: 0 0 20px;
   }
-  .modal p b{ color: var(--orange-tint); font-weight:600; }
+  .modal p b{ color: var(--orange-soft); font-weight:700; }
 
   .modal-actions{
     display:flex;
@@ -393,8 +423,8 @@
     width:100%;
     padding: 13px 18px;
     border-radius: 12px;
-    background: #fff;
-    color: #0a0a0a;
+    background: var(--white);
+    color: var(--black);
     font-weight: 700;
     font-size: 14px;
     display:flex; align-items:center; justify-content:center; gap:9px;
@@ -405,17 +435,17 @@
 
   .btn-secondary{
     appearance:none;
-    border: 1px solid var(--white-faint);
+    border: none;
     cursor:pointer;
     width:100%;
     padding: 12px 18px;
     border-radius: 12px;
-    background: transparent;
+    background: rgba(255,255,255,0.06);
     color: var(--white-dim);
     font-weight: 600;
     font-size: 13px;
   }
-  .btn-secondary:hover{ background: rgba(255,255,255,0.06); }
+  .btn-secondary:hover{ background: rgba(255,255,255,0.1); }
 
   .modal-close{
     position:absolute;
@@ -438,17 +468,18 @@
     position: relative;
     z-index:1;
     text-align:center;
-    padding: 30px 20px 130px;
+    padding: 26px 20px 130px;
+    border-top: 1px solid var(--white-faint);
     font-size: 11.5px;
     color: rgba(255,255,255,0.4);
-    letter-spacing: .04em;
+    letter-spacing: .02em;
   }
-  footer a{ color: rgba(250,102,15,0.85); text-decoration:none; }
+  footer a{ color: var(--orange-soft); text-decoration:none; }
   footer a:hover{ text-decoration: underline; }
 
   @media (max-width: 480px){
     .sign-btn{ padding: 14px 20px; font-size: 13.5px; }
-    .stat-row{ gap: 14px; }
+    .letter-frame img{ max-height: 56vh; }
     footer{ padding-bottom: 150px; }
   }
 
@@ -457,36 +488,11 @@
     *{ transition-duration: .01ms !important; animation-duration: .01ms !important; }
   }
 
-  /* ---------- dLogos logo ---------- */
-  .dlogos-brand-mark{
-    position: fixed;
-    top: max(clamp(14px, 3vw, 26px), env(safe-area-inset-top));
-    right: max(clamp(14px, 3vw, 26px), env(safe-area-inset-right));
-    z-index: 44;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: clamp(86px, 13vw, 118px);
-    height: auto;
-    opacity: .94;
-    text-decoration: none;
-  }
-  .dlogos-brand-mark svg{
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 34px;
-  }
-  @media (max-width: 420px){
-    .dlogos-brand-mark{
-      width: 78px;
-    }
-  }
-
 </style>
 </head>
 <body>
 
+<div class="brand-bar">
 <a class="dlogos-brand-mark" href="https://dlogos.xyz" aria-label="dLogos" target="_blank" rel="noopener noreferrer">
   <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 92 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g clip-path="url(#clip0_790_1829)">
@@ -558,55 +564,43 @@
 </defs>
 </svg>
 </a>
-
-
-<div class="glow-amber"></div>
+</div>
 
 <div class="wrap">
 
-  <div class="eyebrow">
-    <span class="kicker">An open letter · organized on dLogos</span>
-  </div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <p class="kicker">The people have spoken</p>
+      <h1 class="page-title"><span class="accent">Michael Saylor</span><br>for Joe Rogan Experience</h1>
 
-  <h1 class="page-title">To Joe Rogan &amp; Michael Saylor</h1>
-  <p class="page-sub">One signature is an opinion. Ten thousand is a problem you have to answer. We're not asking nicely anymore. Sign below and add to the number neither of you can pretend not to see.</p>
+      <div class="stat">
+        <b id="statSigned">—</b>
+        <span>have signed</span>
+      </div>
 
-  <div class="stat-row">
-    <div class="stat">
-      <b id="statSigned">—</b>
-      <span>Signed</span>
+      <a class="cta-link hero-cta" href="https://dlogos.xyz/podcasts/the-joe-rogan-experience-684639a4/guests/michael-saylor-cedb7d" target="_blank" rel="noopener">View the nomination on dLogos →</a>
     </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <b>1</b>
-      <span>Nominees</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <b>JRE</b>
-      <span>Target podcast</span>
-    </div>
-  </div>
 
-  <div class="letter-stage">
-    <div class="letter-frame" id="letterFrame">
-      <img id="letterImg" src="scroll.webp" alt="An open letter to Joe Rogan and Michael Saylor, presented on a parchment scroll with their portraits pinned at the top, requesting a conversation between them on money, technology, and freedom." />
-    </div>
+    <figure class="letter-stage">
+      <div class="letter-frame" id="letterFrame">
+        <img id="letterImg" src="letter.jpg" alt="A formal petition letter from the Joe Rogan Experience Podcast Production Office requesting an episode featuring Michael Saylor, stamped Received, Approved for Review, and Filed." />
+      </div>
+      <figcaption class="letter-caption">Tap <span class="amt">Sign Letter</span> below to add your name and share this on X</figcaption>
+    </figure>
   </div>
-  <p class="letter-caption">Tap <span class="amt">Sign Letter</span> below to add your name and share this on X</p>
 
   <div class="context">
     <h2>Why this matters</h2>
     <p>Joe Rogan built the space where the most consequential conversations of the last decade happened, unscripted and unhurried. Michael Saylor built the most relentless public case for Bitcoin as the foundation of a new financial order.</p>
-    <p>The overlap is obvious: money, technology, freedom, and the erosion of trust in institutions. This is the conversation dLogos exists to surface, backed by documented audience demand instead of guesswork.</p>
-    <p>See the live nomination and current signal on dLogos: <a href="https://dlogos.xyz/podcasts/the-joe-rogan-experience-684639a4/guests/michael-saylor-cedb7d" target="_blank" rel="noopener">view the nomination page →</a></p>
+    <p>The overlap is obvious: money, technology, freedom, and the erosion of trust in institutions. This is the conversation <a href="https://dlogos.xyz" target="_blank" rel="noopener">dLogos</a> exists to surface, backed by documented audience demand instead of guesswork.</p>
+    <p><a class="cta-link" href="https://dlogos.xyz/podcasts/the-joe-rogan-experience-684639a4/guests/michael-saylor-cedb7d" target="_blank" rel="noopener">View the live nomination on dLogos →</a></p>
   </div>
 
 </div>
 
 <footer>
-  Organized via dLogos · the coordination layer for podcast culture<br>
-  <a href="https://dlogos.xyz/podcasts/the-joe-rogan-experience-684639a4/guests/michael-saylor-cedb7d" target="_blank" rel="noopener">dlogos.xyz/podcasts/the-joe-rogan-experience/guests/michael-saylor</a>
+  Organized via <a href="https://dlogos.xyz" target="_blank" rel="noopener">dLogos</a> · the coordination layer for podcast culture<br>
+  <a class="cta-link" href="https://dlogos.xyz/podcasts/the-joe-rogan-experience-684639a4/guests/michael-saylor-cedb7d" target="_blank" rel="noopener">View the nomination →</a>
 </footer>
 
 <!-- Sticky sign dock -->
@@ -719,8 +713,8 @@
   function downloadLetterImage(){
     return new Promise((resolve)=>{
       const link = document.createElement('a');
-      link.href = 'scroll.webp';
-      link.download = 'joe-rogan-michael-saylor-letter.webp';
+      link.href = 'letter.jpg';
+      link.download = 'joe-rogan-michael-saylor-letter.jpg';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
